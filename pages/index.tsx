@@ -7,7 +7,7 @@ const Home: NextPage = () => {
   return (
     <div className={styles.container}>
       <Head>
-        <title>GamePidgeon Solver</title>
+        <title>GamePigeon Solver</title>
         <meta
           name="description"
           content="Website to help you beat your friends over iMessage games."
@@ -16,7 +16,7 @@ const Home: NextPage = () => {
       </Head>
 
       <main className={styles.main}>
-        <h1 className={styles.title}>GamePidgeon Solver</h1>
+        <h1 className={styles.title}>GamePigeon Solver</h1>
 
         <p className={styles.description}>Select a game to play</p>
 
