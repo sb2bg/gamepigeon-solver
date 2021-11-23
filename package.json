@@ -1,5 +1,5 @@
 {
-  "name": "gamepidgeon-solver",
+  "name": "gamepigeon-solver",
   "private": true,
   "scripts": {
     "dev": "next dev",
