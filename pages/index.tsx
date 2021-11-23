@@ -24,28 +24,42 @@ const Home: NextPage = () => {
           <Link href="/word-hunt">
             <a className={styles.card}>
               <h2>Word Hunt &rarr;</h2>
-              <p>Find in-depth information about Next.js features and API.</p>
+              <p>
+                Visualize all the swipe paths you need to make to get the
+                largest words.
+              </p>
             </a>
           </Link>
 
           <Link href="/anagrams">
             <a className={styles.card}>
               <h2>Anagrams &rarr;</h2>
-              <p>Learn about Next.js in an interactive course with quizzes!</p>
+              <p>
+                Find all the large and small words you can make with your six
+                letters.
+              </p>
             </a>
           </Link>
 
-          <a href="/tic-tac-toe" className={styles.card}>
-            <h2>Tic-Tac-Toe &rarr;</h2>
-            <p>Discover and deploy boilerplate example Next.js projects.</p>
-          </a>
+          <Link href="/tic-tac-toe">
+            <a className={styles.card}>
+              <h2>Tic-Tac-Toe &rarr;</h2>
+              <p>
+                Play the best move possible, the best your opponent can do is
+                tie you.
+              </p>
+            </a>
+          </Link>
 
-          <a href="/four-in-a-row" className={styles.card}>
-            <h2>Four in a Row &rarr;</h2>
-            <p>
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
+          <Link href="/four-in-a-row">
+            <a className={styles.card}>
+              <h2>Four in a Row &rarr;</h2>
+              <p>
+                Solved game, meaning the outcome is always known from any
+                position.
+              </p>
+            </a>
+          </Link>
         </div>
       </main>
     </div>
