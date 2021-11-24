@@ -11,11 +11,11 @@ const words = new Set(
 );
 
 const findAnagrams = (letters: string): string[] => {
-  const result = new Set<string>();
+  const result: string[] = [];
 
   const recursiveHelper = async (letters: string, curr: string) => {
     if (words.has(curr)) {
-      result.add(curr);
+      result.push(curr);
     }
 
     if (letters.length === 0) {
@@ -34,7 +34,7 @@ const findAnagrams = (letters: string): string[] => {
     recursiveHelper(letters.slice(0, i) + letters.slice(i + 1), letters[i]);
   }
 
-  return Array.from(result);
+  return result;
 };
 
 const handler = (req: NextApiRequest, res: NextApiResponse<Data>) => {
@@ -55,7 +55,7 @@ const handler = (req: NextApiRequest, res: NextApiResponse<Data>) => {
       }
 
       res.status(200).json({
-        words: findAnagrams(letters),
+        words: findAnagrams(letters.toUpperCase()),
       });
       break;
     default:
