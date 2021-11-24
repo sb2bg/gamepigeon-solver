@@ -40,6 +40,11 @@ const findAnagrams = (letters: string): string[] => {
 const handler = (req: NextApiRequest, res: NextApiResponse<Data>) => {
   const [gameType, letters] = req.query.params;
 
+  if (letters === undefined) {
+    res.status(400).json({ error: "'letters' parameter missing" });
+    return;
+  }
+
   switch (gameType) {
     case "anagrams":
       if (letters.length !== 6 || !/^[a-zA-Z]{6}$/.test(letters)) {
