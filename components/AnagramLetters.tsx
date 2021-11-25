@@ -1,20 +1,22 @@
 import { useState } from "react";
 import styles from "../styles/AnagramLetters.module.css";
 
-const AnagramLetters = () => {
-  const [letters, setLetters] = useState<string[]>(
-    new Array<string>(6).fill(" ")
-  );
+interface AnagramLettersProps {
+  letters: string[];
+}
 
+const AnagramLetters: React.FC<AnagramLettersProps> = ({ letters }) => {
   return (
-    <div className={styles.letters}>
-      {letters.map((letter, index) => {
-        return (
-          <div key={index} className={styles.letter}>
-            {letter}
-          </div>
-        );
-      })}
+    <div>
+      <div className={styles.letters}>
+        {letters.map((letter, index) => {
+          return (
+            <div key={index} className={styles.letter}>
+              {letter}
+            </div>
+          );
+        })}
+      </div>
     </div>
   );
 };
