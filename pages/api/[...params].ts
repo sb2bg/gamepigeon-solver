@@ -6,16 +6,19 @@ interface Data {
   error?: string;
 }
 
+const filePath =
+  process.env.NODE_ENV === "production" ? "./static" : "./public";
+
 const words = new Set(
-  fs.readFileSync("./public/words.txt", "utf8").split(/\s+/)
+  fs.readFileSync(`${filePath}/words.txt`, "utf8").split(/\s+/)
 );
 
 const findAnagrams = (letters: string): string[] => {
-  const result: string[] = [];
+  const result = new Set<string>();
 
   const recursiveHelper = async (letters: string, curr: string) => {
     if (words.has(curr)) {
-      result.push(curr);
+      result.add(curr);
     }
 
     if (letters.length === 0) {
@@ -34,7 +37,7 @@ const findAnagrams = (letters: string): string[] => {
     recursiveHelper(letters.slice(0, i) + letters.slice(i + 1), letters[i]);
   }
 
-  return result;
+  return new Array(...result);
 };
 
 const handler = (req: NextApiRequest, res: NextApiResponse<Data>) => {
