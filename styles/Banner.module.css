@@ -1,0 +1,15 @@
+.banner {
+  transform: scale(0);
+  background-color: #ffd1dc;
+  border: 2px solid #ff6961;
+  padding: 10px;
+  border-radius: 10px;
+  width: 30.5%;
+  margin: 10px;
+  transition: 0.75s;
+  text-align: center;
+}
+
+.showing {
+  transform: scale(1);
+}
