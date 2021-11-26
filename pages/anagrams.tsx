@@ -28,7 +28,7 @@ const WordHunt = () => {
   const handleSubmit = (event: any) => {
     event.preventDefault();
 
-    const joined = letters.join("");
+    const joined = letters.join("").trim();
 
     if (joined.length < 6 || !joined.match(/[a-z]/i)) {
       setShow(true);
