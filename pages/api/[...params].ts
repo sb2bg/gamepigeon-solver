@@ -1,17 +1,14 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import fs from "fs";
+import path from "path";
 
 interface Data {
   words?: string[];
   error?: string;
 }
+const filePath = path.resolve("./public/words.txt");
 
-const filePath =
-  process.env.NODE_ENV === "production" ? "./static" : "./public";
-
-const words = new Set(
-  fs.readFileSync(`${filePath}/words.txt`, "utf8").split(/\s+/)
-);
+const words = new Set(fs.readFileSync(filePath, "utf8").split(/\s+/));
 
 const findAnagrams = (letters: string): string[] => {
   const result: Set<string> = new Set();
