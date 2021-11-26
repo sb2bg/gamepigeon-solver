@@ -14,11 +14,7 @@ const words = new Set(
 );
 
 const findAnagrams = (letters: string): string[] => {
-<<<<<<< HEAD
   const result: Set<string> = new Set();
-=======
-  const result = new Set<string>();
->>>>>>> e8886ae899e65c68a02fe70889a447a11b24a151
 
   const recursiveHelper = async (letters: string, curr: string) => {
     if (words.has(curr)) {
