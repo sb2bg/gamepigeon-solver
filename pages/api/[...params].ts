@@ -40,6 +40,7 @@ const findAnagrams = (letters: string): string[] => {
 
 const cors = Cors({
   methods: ["GET"],
+  origin: "*",
 });
 
 const runMiddleware = (
