@@ -1,6 +1,7 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import fs from "fs";
 import path from "path";
+import Cors from "cors";
 
 interface Data {
   words?: string[];
@@ -37,7 +38,29 @@ const findAnagrams = (letters: string): string[] => {
   return new Array(...result);
 };
 
-const handler = (req: NextApiRequest, res: NextApiResponse<Data>) => {
+const cors = Cors({
+  methods: ["GET"],
+});
+
+const runMiddleware = (
+  req: NextApiRequest,
+  res: NextApiResponse<Data>,
+  fn: any
+) => {
+  return new Promise((resolve, reject) => {
+    fn(req, res, (result: any) => {
+      if (result instanceof Error) {
+        return reject(result);
+      }
+
+      return resolve(result);
+    });
+  });
+};
+
+const handler = async (req: NextApiRequest, res: NextApiResponse<Data>) => {
+  await runMiddleware(req, res, cors);
+
   const [gameType, letters] = req.query.params;
 
   if (letters === undefined) {
