@@ -88,7 +88,7 @@
 .word {
   margin: 0.75rem;
   padding: 1rem;
-  border: 1px solid #eaeaea;
+  border: 1px solid #aaa;
   border-radius: 10px;
   max-width: 300px;
   transition: 200ms;
@@ -98,7 +98,7 @@
   margin: 3rem;
   font-size: 1.5rem;
   padding: 1rem;
-  border: 2px solid #eaeaea;
+  border: 2px solid #aaa;
   border-radius: 10px;
   width: 20%;
   text-align: center;
@@ -114,9 +114,30 @@
 }
 
 .input {
+  margin: 0.75rem;
+  padding: 1rem;
+  border: 1px solid #aaa;
+  border-radius: 10px;
+  max-width: 300px;
 }
 
 .submit {
+  margin: 0.75rem;
+  padding: 1rem;
+  background-color: #0070f3;
+  color: white;
+  border-radius: 10px;
+  max-width: 300px;
+  transition: 200ms;
+  border: none;
+}
+
+.submit:hover,
+.submit:focus,
+.submit:active {
+  background-color: #0060e9;
+  color: #fff;
+  transform: scale(1.1) translateY(-2px);
 }
 
 .word:hover {

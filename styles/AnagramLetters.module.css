@@ -8,6 +8,7 @@
   max-width: 1.5em;
   max-height: 1.5em;
   margin-top: 50px;
+  margin-bottom: 5px;
   border-radius: 10px;
   background-color: #b3d9ff;
   transition: transform 200ms, filter 200ms;
