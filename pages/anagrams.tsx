@@ -8,6 +8,8 @@ const WordHunt = () => {
   const [letters, setLetters] = useState(new Array(6).fill(" "));
   const [words, setWords] = useState([]);
   const [show, setShow] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [lastQuery, setLastQuery] = useState("");
 
   const handleChange = (e: any) => {
     const newLetters = [];
@@ -40,6 +42,12 @@ const WordHunt = () => {
       return;
     }
 
+    if (joined === lastQuery) {
+      return;
+    }
+
+    setLoading(true);
+
     const url =
       process.env.NODE_ENV === "production"
         ? "https://gamepigeon-solver.vercel.app"
@@ -53,7 +61,11 @@ const WordHunt = () => {
         setWords(
           json.words.sort((a: string, b: string) => b.length - a.length)
         );
+
+        setLoading(false);
       });
+
+    setLastQuery(joined);
   };
 
   return (
@@ -66,12 +78,10 @@ const WordHunt = () => {
 
       <main className={styles.main}>
         <h1 className={styles.title}>Anagrams Solver</h1>
-
         <AnagramLetters letters={letters} />
         <Banner showing={show}>
           To submit, please make sure you have 6 alphabetic characters
         </Banner>
-
         <form onSubmit={handleSubmit}>
           <input
             autoCorrect="off"
@@ -86,10 +96,9 @@ const WordHunt = () => {
             Solve
           </button>
         </form>
-
         <p className={styles.subtitle}>Word Combinations</p>
-
         <div className={styles["word-grid"]}>
+          {loading && <p className={styles.info}>Loading...</p>}
           {words.map((word) => (
             <div key={word} className={styles.word}>
               {word}
