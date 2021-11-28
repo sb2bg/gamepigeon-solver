@@ -1,14 +1,15 @@
 .banner {
   transform: scale(0);
   opacity: 0;
-  background-color: #ffd1dc;
-  border: 2px solid #ff6961;
+  background-color: #ddd;
+  border: 2px solid #aaa;
   padding: 10px;
   border-radius: 10px;
-  width: 30.5%;
+  min-width: 30.5%;
   margin: 10px;
-  transition: transform 0.5s, opacity 0.35s;
+  transition: transform 0.25s, opacity 0.125s;
   text-align: center;
+  font-size: var(--font-md);
 }
 
 .showing {
