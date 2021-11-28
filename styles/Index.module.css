@@ -87,11 +87,16 @@
 
 .subtitle {
   margin: 3rem;
-  font-size: 1.5rem;
+  font-size: var(--font-lg);
   padding: 1rem;
   border: 2px solid #aaa;
   border-radius: 10px;
-  width: 20%;
+  min-width: 20%;
+  text-align: center;
+}
+
+.info {
+  font-size: var(--font-md);
   text-align: center;
 }
 
@@ -104,11 +109,13 @@
 .word {
   margin: 0.75rem;
   padding: 1rem;
+  font-size: var(--font-md);
   border: 1px solid #aaa;
   border-radius: 10px;
   max-width: 300px;
   text-align: center;
   transition: 200ms;
+  max-width: 100%;
 }
 
 .word:hover {

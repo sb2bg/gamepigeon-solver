@@ -1,3 +1,17 @@
+:root {
+  --font-sm: 0.5rem;
+  --font-md: 0.75rem;
+  --font-lg: 1rem;
+}
+
+@media (min-width: 768px) {
+  :root {
+    --font-sm: 0.75rem;
+    --font-md: 1rem;
+    --font-lg: 1.25rem;
+  }
+}
+
 html,
 body {
   padding: 0;
