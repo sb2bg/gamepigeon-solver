@@ -52,9 +52,9 @@ const WordHunt = () => {
 
     solveAnagrams(joined).then((words) => {
       setWords(words.sort((a: string, b: string) => b.length - a.length));
+      setLoading(false);
     });
 
-    setLoading(false);
     setLastQuery(joined);
   };
 
