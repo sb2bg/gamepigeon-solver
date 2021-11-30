@@ -1,10 +1,13 @@
-export const solveAnagrams = async (letters: string): Promise<string[]> => {
-  const words = new Set(
+const getWords = async (): Promise<Set<string>> => {
+  return new Set(
     await fetch("words.txt")
       .then((r) => r.text())
       .then((r) => r.split(/\s+/))
   );
+};
 
+export const solveAnagrams = async (letters: string): Promise<string[]> => {
+  const words = await getWords();
   const result: Set<string> = new Set();
 
   const recursiveHelper = async (letters: string, curr: string) => {
