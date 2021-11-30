@@ -3,10 +3,11 @@ import React, { useState } from "react";
 import AnagramLetters from "../components/AnagramLetters";
 import Banner from "../components/Banner";
 import styles from "../styles/Index.module.css";
+import { solveAnagrams } from "./util/solver";
 
 const WordHunt = () => {
   const [letters, setLetters] = useState(new Array(6).fill(" "));
-  const [words, setWords] = useState([]);
+  const [words, setWords] = useState<string[]>([]);
   const [show, setShow] = useState(false);
   const [loading, setLoading] = useState(false);
   const [lastQuery, setLastQuery] = useState("");
@@ -48,23 +49,11 @@ const WordHunt = () => {
 
     setLoading(true);
 
-    const url =
-      process.env.NODE_ENV === "production"
-        ? "https://gamepigeon-solver.vercel.app"
-        : "http://localhost:3000";
+    solveAnagrams(joined).then((words) => {
+      setWords(words.sort((a: string, b: string) => b.length - a.length));
+    });
 
-    fetch(`${url}/api/anagrams/${letters.join("")}`)
-      .then((data) => data.json())
-      .then((json) => {
-        setWords([]);
-
-        setWords(
-          json.words.sort((a: string, b: string) => b.length - a.length)
-        );
-
-        setLoading(false);
-      });
-
+    setLoading(false);
     setLastQuery(joined);
   };
 
