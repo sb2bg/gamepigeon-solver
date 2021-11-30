@@ -1,0 +1,23 @@
+.grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.item {
+  margin: 0.75rem;
+  padding: 1rem;
+  font-size: var(--font-md);
+  border: 1px solid #aaa;
+  border-radius: 10px;
+  transition: 200ms;
+}
+
+.item:hover {
+  transform: scale(1.1) translateY(-0.25rem);
+}

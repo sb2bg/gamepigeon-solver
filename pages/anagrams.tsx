@@ -2,6 +2,7 @@ import Head from "next/head";
 import React, { useState } from "react";
 import AnagramLetters from "../components/AnagramLetters";
 import Banner from "../components/Banner";
+import WordGrid from "../components/WordGrid";
 import styles from "../styles/Index.module.css";
 import { solveAnagrams } from "./util/solver";
 
@@ -86,14 +87,7 @@ const WordHunt = () => {
           </button>
         </form>
         <p className={styles.subtitle}>Word Combinations</p>
-        <div className={styles["word-grid"]}>
-          {loading && <p className={styles.info}>Loading...</p>}
-          {words.map((word) => (
-            <div key={word} className={styles.word}>
-              {word}
-            </div>
-          ))}
-        </div>
+        <WordGrid words={words} loading={loading} />
       </main>
     </div>
   );

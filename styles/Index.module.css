@@ -100,28 +100,6 @@
   text-align: center;
 }
 
-.word-grid {
-  display: grid;
-  grid-template-columns: repeat(6, 1fr);
-  grid-gap: 1rem;
-}
-
-.word {
-  margin: 0.75rem;
-  padding: 1rem;
-  font-size: var(--font-md);
-  border: 1px solid #aaa;
-  border-radius: 10px;
-  max-width: 300px;
-  text-align: center;
-  transition: 200ms;
-  max-width: 100%;
-}
-
-.word:hover {
-  transform: scale(1.1);
-}
-
 .input {
   margin: 0.75rem;
   padding: 1rem;
