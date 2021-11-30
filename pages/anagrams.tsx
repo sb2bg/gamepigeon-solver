@@ -4,7 +4,7 @@ import AnagramLetters from "../components/AnagramLetters";
 import Banner from "../components/Banner";
 import WordGrid from "../components/WordGrid";
 import styles from "../styles/Index.module.css";
-import { solveAnagrams } from "./util/solver";
+import { solveAnagrams } from "../util/solver";
 
 const WordHunt = () => {
   const [letters, setLetters] = useState(new Array(6).fill(" "));
