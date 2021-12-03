@@ -6,6 +6,7 @@
   height: calc(var(--font-lg) * 4);
   margin: 40px 7px 0 7px;
   border-radius: 20%;
+  caret-color: transparent;
   background-color: #e2f0ff;
   transition: 200ms;
   border: 2px solid #0074d9;
