@@ -1,18 +1,45 @@
 import { useState } from "react";
 import styles from "../styles/AnagramLetters.module.css";
+import LetterInputField from "./LetterInputField";
 
 interface AnagramLettersProps {
-  letters: string[];
+  onSubmit: (letters: string[]) => void;
 }
 
-const AnagramLetters: React.FC<AnagramLettersProps> = ({ letters }) => {
+const AnagramLetters: React.FC<AnagramLettersProps> = ({ onSubmit }) => {
+  const [letters, setLetters] = useState<string[]>(new Array(6).fill(""));
+  const [focused, setFocused] = useState<number>(0);
+
+  const handleSubmit = () => {
+    const joined = letters.join("");
+
+    if (joined.length === 6) {
+      onSubmit(letters);
+    }
+  };
+
   return (
     <div>
       <div className={styles.letters}>
         {letters.map((letter, index) => {
           return (
-            <div key={index} className={styles.letter}>
-              {letter}
+            <div key={index}>
+              <LetterInputField
+                letter={letter}
+                focused={focused === index}
+                setFocus={(_, j) => {
+                  if (j >= 0 && j < letters.length) {
+                    setFocused(j);
+                  }
+                }}
+                setLetter={(letter) => {
+                  const newLetters = [...letters];
+                  newLetters[index] = letter;
+                  setLetters(newLetters);
+                }}
+                index={[0, index]}
+                onSubmit={handleSubmit}
+              />
             </div>
           );
         })}

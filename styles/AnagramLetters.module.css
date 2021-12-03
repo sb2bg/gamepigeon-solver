@@ -1,26 +1,3 @@
-.letter {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.5em;
-  margin: 0 7px;
-  padding: 1.5em;
-  max-width: 1.5em;
-  max-height: 1.5em;
-  margin-top: 50px;
-  margin-bottom: 5px;
-  border-radius: 10px;
-  background-color: #b3d9ff;
-  transition: 200ms;
-  border: 2px solid #0074d9;
-}
-
-.letter:hover {
-  z-index: 1;
-  filter: brightness(1.075);
-  transform: scale(1.1) translateY(-6px);
-}
-
 .letters {
   display: flex;
 }
