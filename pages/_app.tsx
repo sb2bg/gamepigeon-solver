@@ -9,6 +9,7 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
       <Link href="/">
         <a className={styles.home}>&larr; Home</a>
       </Link>
+
       <Component {...pageProps} />
     </div>
   );
