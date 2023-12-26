@@ -2,7 +2,7 @@ import {Grid} from "../pages/word-hunt";
 
 const getWords = async (): Promise<Set<string>> => {
   return new Set(
-    await fetch("/words.txt")
+    await fetch("words.txt")
       .then((r) => r.text())
       .then((r) => r.split(/\s+/))
   );
@@ -38,12 +38,45 @@ export const solveAnagrams = async (letters: string) => {
   return new Array(...result);
 };
 
+class TrieNode {
+  children: {[key: string]: TrieNode} = {};
+  isWord: boolean = false;
+}
+
+class Trie {
+  root: TrieNode = new TrieNode();
+
+  insert(word: string) {
+    let node = this.root;
+    for (let c of word) {
+      if (!node.children[c]) {
+        node.children[c] = new TrieNode();
+      }
+      node = node.children[c];
+    }
+    node.isWord = true;
+  }
+
+  searchPrefix(prefix: string): boolean {
+    let node = this.root;
+    for (let c of prefix) {
+      node = node.children[c];
+      if (!node) {
+        return false;
+      }
+    }
+    return true;
+  }
+}
+
 export const solveWordHunt = async (grid: Grid) => {
   const words = await dict;
-
   const rows = grid.length;
   const cols = grid[0].length;
   const result: Map<string, [number, number][]> = new Map();
+
+  const trie = new Trie();
+  words.forEach((word) => trie.insert(word));
 
   const visited: boolean[][] = Array.from({length: rows}, () =>
     Array(cols).fill(false)
@@ -52,18 +85,25 @@ export const solveWordHunt = async (grid: Grid) => {
   const dfs = (
     row: number,
     col: number,
-    path: string,
+    path: string[],
     route: [number, number][]
   ) => {
     if (row < 0 || col < 0 || row >= rows || col >= cols || visited[row][col]) {
       return;
     }
 
-    path += grid[row][col];
+    path.push(grid[row][col]);
     route.push([row, col]);
 
-    if (words.has(path.toUpperCase())) {
-      result.set(path, route.slice());
+    const pathStr = path.join("");
+    if (!trie.searchPrefix(pathStr)) {
+      path.pop();
+      route.pop();
+      return;
+    }
+
+    if (words.has(pathStr.toUpperCase())) {
+      result.set(pathStr, route.slice());
     }
 
     visited[row][col] = true;
@@ -78,12 +118,13 @@ export const solveWordHunt = async (grid: Grid) => {
     dfs(row - 1, col - 1, path, route);
 
     visited[row][col] = false;
+    path.pop();
     route.pop();
   };
 
   for (let row = 0; row < rows; row++) {
     for (let col = 0; col < cols; col++) {
-      dfs(row, col, "", []);
+      dfs(row, col, [], []);
     }
   }
 
