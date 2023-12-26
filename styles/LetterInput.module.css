@@ -4,18 +4,18 @@
   font-size: 1.5em;
   width: calc(var(--font-lg) * 4);
   height: calc(var(--font-lg) * 4);
-  margin: 40px 7px 0 7px;
   border-radius: 20%;
   caret-color: transparent;
   background-color: #e2f0ff;
   transition: 200ms;
   border: 2px solid #0074d9;
+  margin: 5px 5px 5px 5px;
   outline: none;
   user-select: none;
 }
 
-.letter:hover,
-.letter:focus {
+.anagrams:hover,
+.anagrams:focus {
   transform: scale(1.1) translateY(-8px);
 }
 
