@@ -63,7 +63,7 @@ export const solveWordHunt = async (grid: Grid) => {
     route.push([row, col]);
 
     if (words.has(path.toUpperCase())) {
-      result.set(path, route);
+      result.set(path, route.slice());
     }
 
     visited[row][col] = true;
