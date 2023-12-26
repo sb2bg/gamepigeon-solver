@@ -1,13 +1,18 @@
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {Grid} from "../pages/word-hunt";
 import styles from "../styles/LetterInputGrid.module.css";
 import LetterInputField from "./LetterInputField";
+import React from "react";
 
 interface LetterInputGridProps {
   onSubmit: (letters: Grid) => void;
+  colors?: Map<string, string>;
 }
 
-const LetterInputGrid: React.FC<LetterInputGridProps> = ({onSubmit}) => {
+const LetterInputGrid: React.FC<LetterInputGridProps> = ({
+  onSubmit,
+  colors,
+}) => {
   const [letters, setLetters] = useState<Grid>(
     Array(4)
       .fill([])
@@ -22,13 +27,16 @@ const LetterInputGrid: React.FC<LetterInputGridProps> = ({onSubmit}) => {
   };
 
   return (
-    <div>
-      <div className={styles.letters}>
-        {letters.map((row, i) => (
-          <div key={i} className={styles.row}>
-            {row.map((letter, j) => (
-              <>
+    <div className={styles.letters}>
+      {letters.map((row, i) => (
+        <div key={i} className={styles.row}>
+          {row.map((letter, j) => {
+            const color = colors?.get(`${i},${j}`);
+
+            return (
+              <React.Fragment key={j * 4 + i}>
                 <LetterInputField
+                  color={color}
                   type="word-hunt"
                   key={j * 4 + i}
                   letter={letter}
@@ -53,11 +61,11 @@ const LetterInputGrid: React.FC<LetterInputGridProps> = ({onSubmit}) => {
                   className={styles.divider}
                   style={{display: row.length - 1 === j ? "none" : "block"}}
                 />
-              </>
-            ))}
-          </div>
-        ))}
-      </div>
+              </React.Fragment>
+            );
+          })}
+        </div>
+      ))}
     </div>
   );
 };
