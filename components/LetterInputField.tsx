@@ -9,6 +9,7 @@ interface LetterInputFieldProps {
   index: [number, number];
   type: "word-hunt" | "anagram";
   onSubmit: () => void;
+  color?: string;
 }
 
 const LetterInputField: React.FC<LetterInputFieldProps> = ({
@@ -19,6 +20,7 @@ const LetterInputField: React.FC<LetterInputFieldProps> = ({
   index,
   type,
   onSubmit,
+  color,
 }) => {
   const letterRef = useRef<HTMLInputElement>(null);
 
@@ -57,6 +59,7 @@ const LetterInputField: React.FC<LetterInputFieldProps> = ({
 
   return (
     <input
+      style={{backgroundColor: color}}
       ref={letterRef}
       defaultValue={letter}
       maxLength={1}
