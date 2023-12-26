@@ -43,40 +43,49 @@ export const solveWordHunt = async (grid: Grid) => {
 
   const rows = grid.length;
   const cols = grid[0].length;
-  const result: Set<string> = new Set();
+  const result: Map<string, [number, number][]> = new Map();
+
   const visited: boolean[][] = Array.from({length: rows}, () =>
     Array(cols).fill(false)
   );
 
-  const dfs = (row: number, col: number, path: string) => {
-    if (row < 0 || col < 0 || row >= rows || col >= cols || visited[row][col])
+  const dfs = (
+    row: number,
+    col: number,
+    path: string,
+    route: [number, number][]
+  ) => {
+    if (row < 0 || col < 0 || row >= rows || col >= cols || visited[row][col]) {
       return;
+    }
 
     path += grid[row][col];
+    route.push([row, col]);
 
-    if (path.length >= 3 && words.has(path.toUpperCase())) {
-      result.add(path);
+    if (words.has(path.toUpperCase())) {
+      result.set(path, route);
     }
 
     visited[row][col] = true;
 
-    dfs(row + 1, col, path);
-    dfs(row - 1, col, path);
-    dfs(row, col + 1, path);
-    dfs(row, col - 1, path);
-    dfs(row + 1, col + 1, path);
-    dfs(row + 1, col - 1, path);
-    dfs(row - 1, col + 1, path);
-    dfs(row - 1, col - 1, path);
+    dfs(row + 1, col, path, route);
+    dfs(row - 1, col, path, route);
+    dfs(row, col + 1, path, route);
+    dfs(row, col - 1, path, route);
+    dfs(row + 1, col + 1, path, route);
+    dfs(row + 1, col - 1, path, route);
+    dfs(row - 1, col + 1, path, route);
+    dfs(row - 1, col - 1, path, route);
 
     visited[row][col] = false;
+    route.pop();
   };
 
   for (let row = 0; row < rows; row++) {
     for (let col = 0; col < cols; col++) {
-      dfs(row, col, "");
+      dfs(row, col, "", []);
     }
   }
 
-  return new Array(...result);
+  return result;
 };
