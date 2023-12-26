@@ -24,34 +24,34 @@ const LetterInputGrid: React.FC<LetterInputGridProps> = ({onSubmit}) => {
   return (
     <div>
       <div className={styles.letters}>
-        {letters.map((row, j) => (
-          <div key={j} className={styles.row}>
-            {row.map((letter, i) => (
+        {letters.map((row, i) => (
+          <div key={i} className={styles.row}>
+            {row.map((letter, j) => (
               <>
                 <LetterInputField
                   type="word-hunt"
-                  key={i * 4 + j}
+                  key={j * 4 + i}
                   letter={letter}
-                  focused={focused === i * 4 + j}
-                  setFocus={(i, j) => {
+                  focused={focused === j * 4 + i}
+                  setFocus={(j, i) => {
                     if (
-                      i * 4 + j >= 0 &&
-                      i * 4 + j < letters.length * letters.length
+                      j * 4 + i >= 0 &&
+                      j * 4 + i < letters.length * letters.length
                     ) {
-                      setFocused(i * 4 + j);
+                      setFocused(j * 4 + i);
                     }
                   }}
                   setLetter={(letter) => {
                     const newLetters = [...letters];
-                    newLetters[j][i] = letter;
+                    newLetters[i][j] = letter;
                     setLetters(newLetters);
                   }}
-                  index={[i, j]}
+                  index={[j, i]}
                   onSubmit={handleSubmit}
                 />
                 <div
                   className={styles.divider}
-                  style={{display: i !== 3 ? "block" : "none"}}
+                  style={{display: row.length - 1 === j ? "none" : "block"}}
                 />
               </>
             ))}
