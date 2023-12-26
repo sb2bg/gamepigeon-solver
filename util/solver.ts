@@ -2,7 +2,7 @@ import {Grid} from "../pages/word-hunt";
 
 const getWords = async (): Promise<Set<string>> => {
   return new Set(
-    await fetch("words.txt")
+    await fetch("/words.txt")
       .then((r) => r.text())
       .then((r) => r.split(/\s+/))
   );
