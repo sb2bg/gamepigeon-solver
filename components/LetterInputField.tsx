@@ -61,7 +61,11 @@ const LetterInputField: React.FC<LetterInputFieldProps> = ({
 
   return (
     <input
-      style={{backgroundColor: color ? color : disabled ? "#ccc" : undefined}}
+      style={{
+        backgroundColor: color ? color : disabled ? "#ccc" : undefined,
+        borderColor: color ? color : disabled ? "#ccc" : undefined,
+        color: color ? "#fff" : undefined,
+      }}
       disabled={disabled}
       ref={letterRef}
       defaultValue={letter}
