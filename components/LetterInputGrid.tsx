@@ -6,12 +6,18 @@ import React from "react";
 
 interface LetterInputGridProps {
   onSubmit: (letters: Grid) => void;
-  colors?: Map<string, string>;
+  colors: Map<string, string>;
+  disabled?: boolean;
+  clear: boolean;
+  setClear: (clear: boolean) => void;
 }
 
 const LetterInputGrid: React.FC<LetterInputGridProps> = ({
   onSubmit,
   colors,
+  disabled,
+  clear,
+  setClear,
 }) => {
   const [letters, setLetters] = useState<Grid>(
     Array(4)
@@ -26,16 +32,30 @@ const LetterInputGrid: React.FC<LetterInputGridProps> = ({
     }
   };
 
+  useEffect(() => {
+    if (clear) {
+      setLetters(
+        Array(4)
+          .fill([])
+          .map(() => Array(4).fill(""))
+      );
+
+      setFocused(0);
+      setClear(false);
+    }
+  }, [clear, setClear]);
+
   return (
     <div className={styles.letters}>
       {letters.map((row, i) => (
         <div key={i} className={styles.row}>
           {row.map((letter, j) => {
-            const color = colors?.get(`${i},${j}`);
+            const color = colors.get(`${i},${j}`);
 
             return (
               <React.Fragment key={j * 4 + i}>
                 <LetterInputField
+                  disabled={disabled}
                   color={color}
                   type="word-hunt"
                   key={j * 4 + i}

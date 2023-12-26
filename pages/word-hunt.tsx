@@ -14,17 +14,10 @@ const WordHunt = () => {
   const [highlighted, setHighlighted] = useState<[number, number][]>([]);
   const [colors, setColors] = useState<Map<string, string>>(new Map());
   const [loading, setLoading] = useState(false);
-  const [lastQuery, setLastQuery] = useState<Grid>(
-    Array(4)
-      .fill([])
-      .map(() => Array(4).fill(""))
-  );
+  const [editing, setEditing] = useState<boolean>(true);
+  const [clear, setClear] = useState<boolean>(false);
 
   const handleSubmit = (words: Grid) => {
-    if (words === lastQuery) {
-      return;
-    }
-
     setLoading(true);
 
     solveWordHunt(words).then((solved) => {
@@ -32,7 +25,15 @@ const WordHunt = () => {
       setLoading(false);
     });
 
-    setLastQuery(words);
+    setEditing(false);
+  };
+
+  const handleReset = () => {
+    setWords(new Map());
+    setHighlighted([]);
+    setColors(new Map());
+    setEditing(true);
+    setClear(true);
   };
 
   useEffect(() => {
@@ -55,7 +56,16 @@ const WordHunt = () => {
 
       <main className={styles.main}>
         <h1 className={styles.title}>Word Hunt Solver</h1>
-        <LetterInputGrid onSubmit={handleSubmit} colors={colors} />
+        <LetterInputGrid
+          clear={clear}
+          setClear={setClear}
+          onSubmit={handleSubmit}
+          colors={colors}
+          disabled={!editing}
+        />
+        <button className={styles.reset} onClick={handleReset}>
+          Reset
+        </button>
         <p className={styles.subtitle}>Word Combinations</p>
         <WordGrid
           onClick={(word) => {

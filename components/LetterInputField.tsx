@@ -10,6 +10,7 @@ interface LetterInputFieldProps {
   type: "word-hunt" | "anagram";
   onSubmit: () => void;
   color?: string;
+  disabled?: boolean;
 }
 
 const LetterInputField: React.FC<LetterInputFieldProps> = ({
@@ -21,6 +22,7 @@ const LetterInputField: React.FC<LetterInputFieldProps> = ({
   type,
   onSubmit,
   color,
+  disabled,
 }) => {
   const letterRef = useRef<HTMLInputElement>(null);
 
@@ -59,7 +61,8 @@ const LetterInputField: React.FC<LetterInputFieldProps> = ({
 
   return (
     <input
-      style={{backgroundColor: color}}
+      style={{backgroundColor: color ? color : disabled ? "#ccc" : undefined}}
+      disabled={disabled}
       ref={letterRef}
       defaultValue={letter}
       maxLength={1}

@@ -141,3 +141,12 @@
   background-color: #0060e9;
   color: #fff;
 }
+
+.reset {
+  margin: 0.75rem;
+  padding: 1rem;
+  border-radius: 10px;
+  background-color: #0070f3;
+  color: white;
+  transition: 150ms;
+}
