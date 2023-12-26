@@ -1,9 +1,9 @@
 import Head from "next/head";
-import React, { useState } from "react";
+import React, {useState} from "react";
 import AnagramLetters from "../components/AnagramLetters";
 import WordGrid from "../components/WordGrid";
 import styles from "../styles/Index.module.css";
-import { solveAnagrams } from "../util/solver";
+import {solveAnagrams} from "../util/solver";
 
 const WordHunt: React.FC = () => {
   const [words, setWords] = useState<string[]>([]);
@@ -21,8 +21,8 @@ const WordHunt: React.FC = () => {
 
     setLoading(true);
 
-    solveAnagrams(joined).then((words) => {
-      setWords(words.sort((a: string, b: string) => b.length - a.length));
+    solveAnagrams(joined).then((solved) => {
+      setWords(solved.sort((a: string, b: string) => b.length - a.length));
       setLoading(false);
     });
 
