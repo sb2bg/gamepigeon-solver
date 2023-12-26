@@ -24,9 +24,9 @@ const LetterInputGrid: React.FC<LetterInputGridProps> = ({onSubmit}) => {
   return (
     <div>
       <div className={styles.letters}>
-        {letters.map((row, i) => (
-          <div key={i} className={styles.row}>
-            {row.map((letter, j) => (
+        {letters.map((row, j) => (
+          <div key={j} className={styles.row}>
+            {row.map((letter, i) => (
               <>
                 <LetterInputField
                   type="word-hunt"
@@ -43,7 +43,7 @@ const LetterInputGrid: React.FC<LetterInputGridProps> = ({onSubmit}) => {
                   }}
                   setLetter={(letter) => {
                     const newLetters = [...letters];
-                    newLetters[i][j] = letter;
+                    newLetters[j][i] = letter;
                     setLetters(newLetters);
                   }}
                   index={[i, j]}
@@ -51,7 +51,7 @@ const LetterInputGrid: React.FC<LetterInputGridProps> = ({onSubmit}) => {
                 />
                 <div
                   className={styles.divider}
-                  style={{display: j !== 3 ? "block" : "none"}}
+                  style={{display: i !== 3 ? "block" : "none"}}
                 />
               </>
             ))}
