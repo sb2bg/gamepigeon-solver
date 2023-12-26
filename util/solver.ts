@@ -1,18 +1,10 @@
 import {Grid} from "../pages/word-hunt";
+import x from "../public/words.json";
 
-const getWords = async (): Promise<Set<string>> => {
-  return new Set(
-    await fetch("words.txt")
-      .then((r) => r.text())
-      .then((r) => r.split(/\s+/))
-  );
-};
-
-const dict = getWords();
+const words = new Set(x as string[]);
 
 export const solveAnagrams = async (letters: string) => {
   const result: Set<string> = new Set();
-  const words = await dict;
 
   const recursiveHelper = async (letters: string, curr: string) => {
     if (words.has(curr.toUpperCase())) {
@@ -70,7 +62,6 @@ class Trie {
 }
 
 export const solveWordHunt = async (grid: Grid) => {
-  const words = await dict;
   const rows = grid.length;
   const cols = grid[0].length;
   const result: Map<string, [number, number][]> = new Map();
