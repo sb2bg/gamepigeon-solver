@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import {useEffect, useRef} from "react";
 import styles from "../styles/LetterInput.module.css";
 
 interface LetterInputFieldProps {
@@ -7,6 +7,7 @@ interface LetterInputFieldProps {
   setFocus: (i: number, j: number) => void;
   setLetter: (letter: string) => void;
   index: [number, number];
+  type: "word-hunt" | "anagram";
   onSubmit: () => void;
 }
 
@@ -16,6 +17,7 @@ const LetterInputField: React.FC<LetterInputFieldProps> = ({
   setFocus,
   setLetter,
   index,
+  type,
   onSubmit,
 }) => {
   const letterRef = useRef<HTMLInputElement>(null);
@@ -61,7 +63,9 @@ const LetterInputField: React.FC<LetterInputFieldProps> = ({
       onKeyDown={handleKeyDown}
       onPaste={undefined}
       onDrop={undefined}
-      className={styles.letter}
+      className={`${styles.letter} ${
+        type === "word-hunt" ? styles.hunt : styles.anagrams
+      }`}
       type="text"
     />
   );
