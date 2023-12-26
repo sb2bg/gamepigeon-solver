@@ -17,7 +17,7 @@ const WordGrid: React.FC<WordGridProps> = ({words, onClick, loading}) => {
         <div
           key={word}
           className={styles.item}
-          onClick={() => onClick && onClick(word)}
+          onMouseEnter={() => onClick && onClick(word)}
         >
           {word}
         </div>
