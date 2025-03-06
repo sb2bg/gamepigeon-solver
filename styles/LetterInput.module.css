@@ -1,25 +1,44 @@
 .letter {
   padding: 0;
   text-align: center;
-  font-size: 1.5em;
+  font-size: 1.75em;
   width: calc(var(--font-lg) * 4);
   height: calc(var(--font-lg) * 4);
-  border-radius: 20%;
+  border-radius: 12px;
   caret-color: transparent;
-  background-color: #e2f0ff;
-  transition: 200ms;
-  border: 2px solid #0074d9;
-  margin: 5px 5px 5px 5px;
+  background-color: var(--card-bg);
+  transition: var(--transition);
+  border: 2px solid var(--primary);
+  margin: 8px;
   outline: none;
   user-select: none;
+  box-shadow: var(--shadow);
+  color: var(--dark-text);
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.anagrams {
+  width: calc(var(--font-lg) * 4.5);
+  height: calc(var(--font-lg) * 4.5);
+  font-size: 2em;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
 }
 
 .anagrams:hover,
 .anagrams:focus {
-  transform: scale(1.1) translateY(-8px);
+  transform: scale(1.05) translateY(-5px);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
 }
 
 .letter:focus {
-  background-color: #b3d9ff;
-  color: #005fb3;
+  background-color: var(--primary);
+  color: white;
+  border-color: var(--primary-dark);
+  box-shadow: 0 0 0 3px rgba(58, 134, 255, 0.3);
+}
+
+.letter:disabled {
+  opacity: 0.9;
+  cursor: not-allowed;
 }
