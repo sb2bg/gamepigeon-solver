@@ -121,3 +121,97 @@ export const solveWordHunt = async (grid: Grid) => {
 
   return result;
 };
+
+// Tic Tac Toe Game State Type
+export type TicTacToeBoard = Array<string | null>;
+export type Player = 'X' | 'O';
+
+// Check if there's a winner
+export const checkWinner = (board: TicTacToeBoard): string | null => {
+  const lines = [
+    [0, 1, 2], [3, 4, 5], [6, 7, 8], // rows
+    [0, 3, 6], [1, 4, 7], [2, 5, 8], // columns
+    [0, 4, 8], [2, 4, 6]             // diagonals
+  ];
+
+  for (let i = 0; i < lines.length; i++) {
+    const [a, b, c] = lines[i];
+    if (board[a] && board[a] === board[b] && board[a] === board[c]) {
+      return board[a];
+    }
+  }
+
+  return null;
+};
+
+// Check if the board is full (draw)
+export const isBoardFull = (board: TicTacToeBoard): boolean => {
+  return board.every(cell => cell !== null);
+};
+
+// Minimax algorithm with alpha-beta pruning
+export const minimax = (
+  board: TicTacToeBoard,
+  depth: number,
+  isMaximizing: boolean,
+  alpha: number = -Infinity,
+  beta: number = Infinity,
+  player: Player = 'X',
+  opponent: Player = 'O'
+): number => {
+  // Check for terminal state
+  const winner = checkWinner(board);
+  if (winner === player) return 10 - depth;
+  if (winner === opponent) return depth - 10;
+  if (isBoardFull(board)) return 0;
+
+  if (isMaximizing) {
+    let bestScore = -Infinity;
+    for (let i = 0; i < board.length; i++) {
+      if (board[i] === null) {
+        board[i] = player;
+        const score = minimax(board, depth + 1, false, alpha, beta, player, opponent);
+        board[i] = null;
+        bestScore = Math.max(score, bestScore);
+        alpha = Math.max(alpha, bestScore);
+        if (beta <= alpha) break;
+      }
+    }
+    return bestScore;
+  } else {
+    let bestScore = Infinity;
+    for (let i = 0; i < board.length; i++) {
+      if (board[i] === null) {
+        board[i] = opponent;
+        const score = minimax(board, depth + 1, true, alpha, beta, player, opponent);
+        board[i] = null;
+        bestScore = Math.min(score, bestScore);
+        beta = Math.min(beta, bestScore);
+        if (beta <= alpha) break;
+      }
+    }
+    return bestScore;
+  }
+};
+
+// Find the best move
+export const findBestMove = (board: TicTacToeBoard, currentPlayer: Player): number => {
+  const opponent = currentPlayer === 'X' ? 'O' : 'X';
+  let bestScore = -Infinity;
+  let bestMove = -1;
+
+  for (let i = 0; i < board.length; i++) {
+    if (board[i] === null) {
+      board[i] = currentPlayer;
+      const score = minimax(board, 0, false, -Infinity, Infinity, currentPlayer, opponent);
+      board[i] = null;
+      
+      if (score > bestScore) {
+        bestScore = score;
+        bestMove = i;
+      }
+    }
+  }
+
+  return bestMove;
+};
