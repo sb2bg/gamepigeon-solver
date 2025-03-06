@@ -32,22 +32,77 @@ const LetterInputField: React.FC<LetterInputFieldProps> = ({
     // check if alpha character was entered
     if (e.key.length === 1 && e.key.match(/[a-z]/i)) {
       setLetter(e.key.toUpperCase());
-      setFocus(index[0], index[1] + 1);
+      
+      // For Word Hunt
+      if (type === "word-hunt") {
+        if (index[0] === 3) {
+          // If at the end of a row, move to the first position of the next row
+          setFocus(0, index[1] + 1);
+        } else {
+          // Otherwise move to the right
+          setFocus(index[0] + 1, index[1]);
+        }
+      } else {
+        // For Anagrams, move to the next index (increment i)
+        setFocus(index[0], index[1] + 1);
+      }
     } else if (e.key === "Delete") {
       setLetter("");
     } else if (e.key === "Backspace") {
       setLetter("");
-      setFocus(index[0], index[1] - 1);
+      if (type === "word-hunt") {
+        if (index[0] === 0 && index[1] > 0) {
+          // If at the start of a row (not first row), move to the end of the previous row
+          setFocus(3, index[1] - 1);
+        } else {
+          // Otherwise move left
+          setFocus(index[0] - 1, index[1]);
+        }
+      } else {
+        setFocus(index[0], index[1] - 1);
+      }
     } else if (e.key === "ArrowLeft") {
-      setFocus(index[0], index[1] - 1);
+      if (type === "word-hunt") {
+        if (index[0] === 0 && index[1] > 0) {
+          // If at the start of a row (not first row), move to the end of the previous row
+          setFocus(3, index[1] - 1);
+        } else {
+          // Otherwise move left
+          setFocus(index[0] - 1, index[1]);
+        }
+      } else {
+        setFocus(index[0], index[1] - 1);
+      }
     } else if (e.key === "ArrowRight") {
-      setFocus(index[0], index[1] + 1);
+      if (type === "word-hunt") {
+        if (index[0] === 3 && index[1] < 3) {
+          // If at the end of a row (not last row), move to the start of the next row
+          setFocus(0, index[1] + 1);
+        } else {
+          // Otherwise move right
+          setFocus(index[0] + 1, index[1]);
+        }
+      } else {
+        setFocus(index[0], index[1] + 1);
+      }
     } else if (e.key === "ArrowUp") {
-      setFocus(index[0] - 1, index[1]);
+      if (type === "word-hunt") {
+        setFocus(index[0], index[1] - 1);
+      } else {
+        setFocus(index[0] - 1, index[1]);
+      }
     } else if (e.key === "ArrowDown") {
-      setFocus(index[0] + 1, index[1]);
+      if (type === "word-hunt") {
+        setFocus(index[0], index[1] + 1);
+      } else {
+        setFocus(index[0] + 1, index[1]);
+      }
     } else if (e.key === "Tab") {
-      setFocus(index[0], index[1] + 1);
+      if (type === "word-hunt") {
+        setFocus(index[0] + 1, index[1]);
+      } else {
+        setFocus(index[0], index[1] + 1);
+      }
     } else if (e.key === "Enter") {
       onSubmit();
     }
