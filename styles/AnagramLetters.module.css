@@ -1,3 +1,17 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 1rem 0 2rem;
+}
+
 .letters {
   display: flex;
+  flex-wrap: nowrap;
+  justify-content: center;
+  background-color: var(--card-bg);
+  padding: 1.5rem 2rem;
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow);
+  gap: 15px;
 }
