@@ -1,7 +1,18 @@
 :root {
-  --font-sm: 0.5rem;
-  --font-md: 0.75rem;
-  --font-lg: 1rem;
+  --font-sm: 0.6rem;
+  --font-md: 0.85rem;
+  --font-lg: 1.1rem;
+  --primary: #3a86ff;
+  --primary-dark: #2563eb;
+  --secondary: #ff006e;
+  --accent1: #fb5607;
+  --accent2: #ffbe0b;
+  --light-bg: #f8fafc;
+  --dark-text: #334155;
+  --card-bg: #ffffff;
+  --border-radius: 12px;
+  --shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  --transition: all 0.2s ease-in-out;
 }
 
 @media (min-width: 768px) {
@@ -18,6 +29,9 @@ body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  background: linear-gradient(135deg, var(--light-bg) 0%, #e0f2fe 100%);
+  color: var(--dark-text);
+  min-height: 100vh;
 }
 
 a {
@@ -27,4 +41,19 @@ a {
 
 * {
   box-sizing: border-box;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 700;
+  margin: 0;
+}
+
+button {
+  cursor: pointer;
+  font-weight: 600;
+}
+
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.7;
 }
